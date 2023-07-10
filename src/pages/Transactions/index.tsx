@@ -1,4 +1,3 @@
-import { useContext } from "react";
 import { Header } from "../../components/Header";
 import { Summary } from "../../components/Summary";
 import { SearchForm } from "./Components/SearchForm";
@@ -9,6 +8,7 @@ import {
 } from "./styles";
 import { TransactionContext } from "../../contexts/TransactionContext";
 import { dataFormatter, priceFormatter } from "../../utils/formatter";
+import { useContextSelector } from "use-context-selector";
 
 interface Transaction {
   id: number;
@@ -20,7 +20,9 @@ interface Transaction {
 }
 
 export function Transaction() {
-  const { transactions } = useContext(TransactionContext);
+  const transactions = useContextSelector(TransactionContext, (context) => {
+    return context.transactions;
+  });
 
   return (
     <div>
